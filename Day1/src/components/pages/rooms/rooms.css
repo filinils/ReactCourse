@@ -29,4 +29,16 @@
     padding-left: 20px;
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
 }
-
+.hero-img{
+    margin-top: 40px;
+}
+.bookbutton{
+    background-color:#ff5a5f;
+    color: white;
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;  
+    border: none;
+    margin-left: 10%;  
+}

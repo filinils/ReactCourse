@@ -25,7 +25,7 @@ class StartPage extends React.Component {
 						</div>
 					</div>
 					<div className="leftside">
-						<h3 className="titleh3">2 086,82 kr</h3>
+						<h3 className="titleh3">000000</h3>
 					</div>
 				</div>
 			</div>
