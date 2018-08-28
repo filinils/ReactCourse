@@ -3,3 +3,12 @@
     flex-direction:row;
     justify-content: space-between;
 }
+
+.hero-img {
+    background: url(https://a0.muscache.com/im/pictures/17979331/3f134177_original.jpg);
+    background-size: cover;
+    width: 100%;
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+}

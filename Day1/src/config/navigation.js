@@ -6,6 +6,10 @@ const nodes = [
 	{
 		title: "Second",
 		route: "/second"
+	},
+	{
+		title: "Rooms",
+		route: "/rooms"
 	}
 ];
 

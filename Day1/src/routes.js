@@ -1,6 +1,7 @@
 import App from "./components/App";
 import StartPage from "./components/pages/start/StartPage";
 import SecondPage from "./components/pages/second/SecondPage";
+import RoomPage from "./components/pages/rooms/RoomPage";
 
 const routes = [
 	{
@@ -24,6 +25,12 @@ const routes = [
 						component: StartPage
 					}
 				]
+			},
+			
+			{
+				title: "Room",
+				path: "/rooms/:id",
+				component: RoomPage
 			}
 		]
 	}
