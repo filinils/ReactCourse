@@ -2,6 +2,7 @@ import App from "./components/App";
 import StartPage from "./components/pages/start/StartPage";
 import SecondPage from "./components/pages/second/SecondPage";
 import RoomPage from "./components/pages/rooms/RoomPage";
+import BookingPage from "./components/Booking/Booking";
 
 const routes = [
 	{
@@ -12,6 +13,12 @@ const routes = [
 				title: "Start",
 				path: "/start",
 				component: StartPage
+			},
+
+			{
+				title: "Booking",
+				path: "/Booking",
+				component: BookingPage
 			},
 
 			{

@@ -10,6 +10,10 @@ const nodes = [
 	{
 		title: "Rooms",
 		route: "/rooms"
+	},
+	{
+		title: "Booking",
+		route: "/booking"
 	}
 ];
 

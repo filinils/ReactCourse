@@ -1,5 +1,6 @@
 var bookings = require("./controllers/bookings.js");
 var rooms = require("./controllers/rooms.js");
+var available = require("./controllers/available.js");
 
 var bodyParser = require("body-parser");
 var express = require("express");
@@ -32,6 +33,8 @@ app.post("/api/bookings", bookings.create);
 
 app.get("/api/rooms", rooms.read);
 app.get("/api/rooms/:roomId", rooms.readById);
+
+app.get("/api/available", available.read);
 
 http.listen(3000, function () {
 	console.log("Example app listening on port 3000!");
