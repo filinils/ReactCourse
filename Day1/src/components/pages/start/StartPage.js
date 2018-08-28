@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import RouteWithSubRoutes from "../../../config/RouteWithSubRoutes";
 import axios from 'axios';
+import Chat from './../../chatcomponent/chat';
 
 class StartPage extends React.Component {
 	constructor(props) {
@@ -121,6 +122,8 @@ class StartPage extends React.Component {
 						{this.state.mockedData.map(this.renderRoom)}
 					</div>
 				</div>
+
+				<Chat />
 			</div>
 		);
 	}
