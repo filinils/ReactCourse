@@ -1,0 +1,32 @@
+.box1{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+.rightside{
+    width: 70%;
+}
+.leftside{
+    border: 1px #eeeeee solid;
+    width: 30%;
+    margin-top: 20px;
+
+}
+.box-text{
+    border: 1px #eeeeee solid;
+    margin-right: 40px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.title{
+    color: #484848;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+}
+.titleh3{
+    color: #484848;
+    padding-left: 20px;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+}
+
