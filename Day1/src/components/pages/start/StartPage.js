@@ -25,7 +25,7 @@ class StartPage extends React.Component {
 				this.setState({
 					mockedData: [this.state.mockedData[i]]
 				})
-				break;
+
 			}
 		}
 
@@ -57,7 +57,7 @@ class StartPage extends React.Component {
 	}
 
 	renderRoom(room, index) {
-		return (<Link to={room.link} key={index}> <div className="column">
+		return (<Link to={room.link} key={index}> <div className="column startPageColumn">
 			<h2>{room.title}</h2>
 			<p>Price:{room.price} kr</p>
 			<p className="paragraphDescr">{room.description}</p>
