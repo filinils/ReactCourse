@@ -1,4 +1,5 @@
 var bookings = require("./controllers/bookings.js");
+var rooms = require("./controllers/rooms.js");
 
 var bodyParser = require("body-parser");
 var express = require("express");
@@ -11,7 +12,7 @@ io.on("connection", () => {
 	console.log("connection is on :-)");
 });
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "http://localhost:8080");
 	res.header("Access-Control-Allow-Credentials", true);
 	res.header(
@@ -22,14 +23,15 @@ app.use(function(req, res, next) {
 });
 app.use(bodyParser.json());
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
 	res.send("Hello World!");
 });
 
 app.get("/api/bookings", bookings.read);
-
 app.post("/api/bookings", bookings.create);
 
-http.listen(3000, function() {
+app.get("/api/rooms", rooms.read);
+
+http.listen(3000, function () {
 	console.log("Example app listening on port 3000!");
 });
