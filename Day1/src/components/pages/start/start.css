@@ -6,7 +6,17 @@
     grid-template-rows: auto auto auto;
 }
 
-.column {}
+.column {
+    background: url(https://a0.muscache.com/im/pictures/17979331/3f134177_original.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.column p,
+.column h2 {
+    color: #FFF;
+}
 
 .rowinlineblock .column {
     display: inline-block !important;
