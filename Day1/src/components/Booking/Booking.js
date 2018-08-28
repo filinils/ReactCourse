@@ -98,8 +98,10 @@ renderMonth() {
                     // onChange={this.onChange}
                     value={this.state.date}
                 /> */}
-
-                {this.renderMonth()}
+                <div className="grid-container">
+                 {this.renderMonth()}
+                </div>
+                
                    
                 {/* {this.RenderDates(this.state.available)} */}
                 {/* <div className="grid-container">
