@@ -31,6 +31,7 @@ app.get("/api/bookings", bookings.read);
 app.post("/api/bookings", bookings.create);
 
 app.get("/api/rooms", rooms.read);
+app.get("/api/rooms/:roomId", rooms.readById);
 
 http.listen(3000, function () {
 	console.log("Example app listening on port 3000!");
