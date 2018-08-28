@@ -1,11 +1,16 @@
 import React from "react";
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom';
 import RouteWithSubRoutes from "../../../config/RouteWithSubRoutes";
 import axios from 'axios';
 
 class StartPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { mockedData: [] };
+		this.state = { mockedData: [], tempData: [] };
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.getRooms = this.getRooms.bind(this);
 		this.sortByKey = this.sortByKey.bind(this);
@@ -13,8 +18,22 @@ class StartPage extends React.Component {
 		this.searchInput = this.searchInput.bind(this);
 	}
 
-	searchInput(text) {
-		console.log(text);
+	searchInput(event) {
+		const searchTerm = event.target.value;
+		for (var i = 0; i < this.state.mockedData.length; i++) {
+			if (this.state.mockedData[i].title.indexOf(searchTerm) != -1) {
+				this.setState({
+					mockedData: [this.state.mockedData[i]]
+				})
+				break;
+			}
+		}
+
+		if (searchTerm.length <= 0) {
+			this.setState({
+				mockedData: this.state.tempData
+			});
+		}
 	}
 
 	getRooms() {
@@ -31,17 +50,18 @@ class StartPage extends React.Component {
 	componentDidMount() {
 		this.getRooms().then((result) => {
 			this.setState({
-				mockedData: result
+				mockedData: result,
+				tempData: result
 			});
 		})
 	}
 
 	renderRoom(room, index) {
-		return (<div className="column" key={index}>
+		return (<Link to={room.link} key={index}> <div className="column">
 			<h2>{room.title}</h2>
 			<p>Price:{room.price} kr</p>
-			<p>{room.description}</p>
-		</div>);
+			<p className="paragraphDescr">{room.description}</p>
+		</div></Link>);
 	}
 
 	sortByKey(array, key) {
@@ -89,7 +109,7 @@ class StartPage extends React.Component {
 		return (
 			<div className="layout-content">
 				<div className="headerSearch">
-					<input type="text" placeholder="Search..." onChange={(e) => this.searchInput(e)} />
+					<input type="text" name="search" placeholder="Search..." onChange={this.searchInput} />
 				</div>
 				<div className="filter">
 					<span id="alph" onClick={this.sortData}>Alphabetic</span>

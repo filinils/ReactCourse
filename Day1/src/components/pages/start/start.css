@@ -38,3 +38,11 @@
     position: relative;
     top: 120px;
 }
+
+.paragraphDescr {
+    display: inline-block;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
