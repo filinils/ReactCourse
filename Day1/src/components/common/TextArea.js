@@ -4,20 +4,19 @@ import PropTypes from 'prop-types';
 
 
 
-const TextInput = ({name, label, onChange, placeholder, value, error}) => {
+const TextInput = ({ name, label, onChange, placeholder, value, error }) => {
 
 
     return (
         <div>
-            <textarea
-
+            <textarea readOnly
                 name={name}
 
                 placeholder={placeholder}
 
                 onChange={onChange}
                 value={value}
-                >
+            >
 
             </textarea>
             {error && <div className="module-validation module-validation-danger">{error}</div>}

@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import RouteWithSubRoutes from "../../../config/RouteWithSubRoutes";
 import axios from 'axios';
+import Chat from './../../chatcomponent/chat';
 
 class StartPage extends React.Component {
 	constructor(props) {
@@ -25,7 +26,7 @@ class StartPage extends React.Component {
 				this.setState({
 					mockedData: [this.state.mockedData[i]]
 				})
-				break;
+
 			}
 		}
 
@@ -57,7 +58,7 @@ class StartPage extends React.Component {
 	}
 
 	renderRoom(room, index) {
-		return (<Link to={room.link} key={index}> <div className="column">
+		return (<Link to={room.link} key={index}> <div className="column startPageColumn">
 			<h2>{room.title}</h2>
 			<p>Price:{room.price} kr</p>
 			<p className="paragraphDescr">{room.description}</p>
@@ -121,6 +122,8 @@ class StartPage extends React.Component {
 						{this.state.mockedData.map(this.renderRoom)}
 					</div>
 				</div>
+
+				<Chat />
 			</div>
 		);
 	}
