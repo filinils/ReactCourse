@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import availableDates from "./availableReducer";
+import messages from "./chatReducer";
 
 const rootReducer = combineReducers({
-	availableDates
+	availableDates,
+	messages
 });
 
 export default rootReducer;

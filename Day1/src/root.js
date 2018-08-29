@@ -6,12 +6,13 @@ import configuerStore from "./store/configureStore";
 import { Provider } from "react-redux";
 
 import RouteWithSubRoutes from "./config/RouteWithSubRoutes";
+import { messageReciever } from "./actions/chatActions";
 
 // Stylesheets
 require("../style/index.scss");
 
 const store = configuerStore();
-
+store.dispatch(messageReciever());
 
 const Routes = ({ routes }) => {
 	return (

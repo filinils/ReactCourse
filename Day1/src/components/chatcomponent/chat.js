@@ -2,6 +2,8 @@ import React from "react";
 import io from "socket.io-client";
 import TextInput from './../common/TextInput';
 import TextArea from './../common/TextArea';
+import PropTypes from "prop-types";
+import { connect } from "react-redux"
 
 
 
@@ -67,7 +69,8 @@ class Chat extends React.Component {
         return (
             <div>
                 <div className="chatLog">
-                    {this.state.history.map(this.getData)}
+                    {console.log("ioia", this.props.messages)}
+                    {this.props.messages.map(this.getData)}
                 </div>
                 <input type="text" name="username" onChange={this.changeUsername} placeholder="Name" />
                 <TextInput
@@ -83,4 +86,22 @@ class Chat extends React.Component {
 }
 
 
-export default Chat;
+//export default Chat;
+
+Chat.propTypes = {
+    messages: PropTypes.array.isRequired
+};
+function mapStateToProps(state, ownProps) {
+    return {
+        messages: state.messages ? state.messages : []
+    };
+}
+
+function mapDispatchToProps() {
+    return {};
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Chat);

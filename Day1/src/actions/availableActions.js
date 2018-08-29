@@ -5,15 +5,18 @@ import endpoints from "../config/endpoints";
 export function loadAvailableSuccess(availableDates) {
 	return { type: types.LOAD_AVAILABLE_DATES, availableDates };
 }
-export function loadAvailableTimes(){
-	return function(dispatch) {
+export function loadAvailableTimes() {
+	return function (dispatch) {
 		return axios.get(endpoints.available).then(payload => {
-			if(payload.data) {
+			if (payload.data) {
 				dispatch(loadAvailableSuccess(payload.data));
 			}
 		})
 	}
 }
+
+
+
 
 // export function updateBooking(booking) {
 // 	return { type: types.UPDATE_BOOKING, booking };

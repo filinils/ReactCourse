@@ -12,3 +12,4 @@ export default function availableReducer(state = initialState.availableDates, ac
 			return state;
 	}
 }
+
