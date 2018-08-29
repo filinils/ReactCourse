@@ -38,7 +38,7 @@ class StartPage extends React.Component {
 	}
 
 	getRooms() {
-		return axios.get('http://localhost:3000/api/rooms')
+		return axios.get('http://46.101.184.228:3000/api/rooms')
 			.then(function (response) {
 				return response.data;
 			})

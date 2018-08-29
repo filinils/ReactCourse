@@ -11,7 +11,8 @@ class Chat extends React.Component {
         this.state = {
             valText: '',
             history: [],
-            socket: ''
+            socket: '',
+            username: ''
         }
 
         this.chatText = this.chatText.bind(this);
@@ -21,7 +22,7 @@ class Chat extends React.Component {
 
     componentDidMount() {
 
-        const newSocket = io.connect("http://localhost:3000");
+        const newSocket = io.connect("http://46.101.184.228:3000");
         newSocket.on('new_message', (data) => {
             console.log("Data från server: ", data)
             var temp = this.state.history;
@@ -40,10 +41,14 @@ class Chat extends React.Component {
         this.setState({ valText: e.target.value });
     }
 
+    usernameChange(e) {
+        this.setState({ username: e.target.value });
+    }
+
     sendMessage() {
         var date = new Date();
         var currentTime = date.getHours() + ":" + date.getMinutes();
-        var username = "Client-user"
+        var username = this.state.username;
         this.state.socket.emit('new_message', {
             message: this.state.valText,
             timestamp: currentTime,
@@ -69,6 +74,7 @@ class Chat extends React.Component {
                     onChange={this.chatText}
                     placeholder="Chat!"
                 />
+                <input type="text" placeholder="Username.." width="200px" onChange={this.usernameChange} />
                 <button type="button" onClick={this.sendMessage}>Send</button>
             </div >
         )
