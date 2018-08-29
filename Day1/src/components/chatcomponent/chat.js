@@ -11,17 +11,19 @@ class Chat extends React.Component {
         this.state = {
             valText: '',
             history: [],
-            socket: ''
+            socket: '',
+            username: 'Test'
         }
 
         this.chatText = this.chatText.bind(this);
+        this.changeUsername = this.changeUsername.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
 
     }
 
     componentDidMount() {
 
-        const newSocket = io.connect("http://localhost:3000");
+        const newSocket = io.connect("http://46.101.184.228");
         newSocket.on('new_message', (data) => {
             console.log("Data från server: ", data)
             var temp = this.state.history;
@@ -40,10 +42,14 @@ class Chat extends React.Component {
         this.setState({ valText: e.target.value });
     }
 
+    changeUsername(e) {
+        this.setState({ username: e.target.value });
+    }
+
     sendMessage() {
         var date = new Date();
         var currentTime = date.getHours() + ":" + date.getMinutes();
-        var username = "Client-user"
+        var username = this.state.username;
         this.state.socket.emit('new_message', {
             message: this.state.valText,
             timestamp: currentTime,
@@ -63,6 +69,7 @@ class Chat extends React.Component {
                 <div className="chatLog">
                     {this.state.history.map(this.getData)}
                 </div>
+                <input type="text" name="username" onChange={this.changeUsername} placeholder="Name" />
                 <TextInput
                     name="TextInputChat"
                     label="inputText"

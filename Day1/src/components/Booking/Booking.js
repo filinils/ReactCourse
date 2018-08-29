@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-// import Moment from 'moment';
 import * as moment from 'moment';
-// import Calendar from 'react-calendar';
 
 export default class Booking extends React.Component {
 
@@ -11,13 +9,15 @@ constructor(props) {
     super(props);
 
     this.state = {
-        available: []
+        available: [],
+        checkInDate: '',
+        checkOutDate: '',
+        checkInActive: ''
     }
     this.componentDidMount = this.componentDidMount.bind(this);
     this.renderMonth = this.renderMonth.bind(this);
+    this.setDate = this.setDate.bind(this);
 }       
-
-// onChange = date => this.setState({ date })
 
 getAvailabeTimes(){
     return axios.get("http://localhost:3000/api/available/")
@@ -32,8 +32,6 @@ componentDidMount() {
     this.getAvailabeTimes().then((response)=>{
     this.setState({available:response})}
     )
-          
-    
 }
 
 
@@ -48,7 +46,7 @@ renderMonth() {
         let isAv = this.state.available[i.toString()];
         
         if(isAv) {
-            calendar.push(<div key={i} className="grid-item">{i + 1}a</div>);
+            calendar.push(<div key={i} onClick={this.setDate} className="grid-item">{i + 1}</div>);
         }
         else {
             calendar.push(<div key={i} className="grid-item">{i + 1}</div>);
@@ -59,6 +57,36 @@ renderMonth() {
 
     return calendar;
 }
+
+setDate(event) {
+
+    event.target.classList.toggle('isActive');
+    let date = event.target.innerHTML;
+    if(this.state.checkInDate === '') {
+        this.setState({checkInDate: date});
+
+
+    }
+    else {
+        this.setState({checkOutDate: date});
+    }
+
+    if(this.state.checkInDate !== '' && this.state.checkOutDate !== '') {
+
+    }
+    
+
+    
+}
+
+// toggleCheckin() {
+//     let isActive = this.state.isActive === 'isactive' ? '' : 'isactive'; 
+
+//     this.setState({isActive: isActive });
+// }
+// toggleCheckOut() {
+
+// }
 
 // RenderDates(dates) {
 
@@ -71,14 +99,14 @@ renderMonth() {
 
     render(){
 
-        const calendarStrings = {
-            lastDay : '[Yesterday at] LT',
-            sameDay : '[Today at] LT',
-            nextDay : '[Tomorrow at] LT',
-            lastWeek : '[last] dddd [at] LT',
-            nextWeek : 'dddd [at] LT',
-            sameElse : 'L'
-        };
+        // const calendarStrings = {
+        //     lastDay : '[Yesterday at] LT',
+        //     sameDay : '[Today at] LT',
+        //     nextDay : '[Tomorrow at] LT',
+        //     lastWeek : '[last] dddd [at] LT',
+        //     nextWeek : 'dddd [at] LT',
+        //     sameElse : 'L'
+        // };
 
         return (
             <div className="container">
@@ -86,8 +114,8 @@ renderMonth() {
                     <p2>650kr</p2>
                 </div>
                 <div className="row">
-                    <button>Incheck</button>
-                    <button>Utcheck</button>
+                    <button /* onClick={this.toggleCheckIn} */ className={this.state.isActive} >Incheck</button>
+                    <button /* onClick={this.toggle} */ className={this.state.isActive} >Utcheck</button>
                 </div>
                 <div className="row">
                     <button>(--</button>
@@ -99,23 +127,8 @@ renderMonth() {
                     value={this.state.date}
                 /> */}
                 <div className="grid-container">
-                 {this.renderMonth()}
+                    {this.renderMonth()}
                 </div>
-                
-                   
-                {/* {this.RenderDates(this.state.available)} */}
-                {/* <div className="grid-container">
-                    <div className="grid-item">1</div>
-                    <div className="grid-item">2</div>
-                    <div className="grid-item">3</div>
-                    <div className="grid-item">4</div>
-                    <div className="grid-item">5</div>
-                    <div className="grid-item">6</div>
-                    <div className="grid-item">7</div>
-                    <div className="grid-item">8</div>
-                    <div className="grid-item">9</div>
-
-                </div> */}
             </div>
         )
     };
