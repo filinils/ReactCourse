@@ -14,7 +14,8 @@ constructor(props) {
         availableDates: [],
         checkInDate: '',
         checkOutDate: '',
-        checkInActive: ''
+        checkInActive: '',
+        totalPrice: ''
     }
     this.componentDidMount = this.componentDidMount.bind(this);
     this.renderMonth = this.renderMonth.bind(this);
@@ -43,44 +44,68 @@ componentDidMount() {
 
 renderMonth() {
 
-    // if(this.props.availableDates){
+let availableDates = this.props.availableDates;
 
+    if(availableDates.length > 0)
+    {
         let calendar = [];
         const days = moment().daysInMonth();
     
         for(let i = 0; i < days; i++) {
-            let isAv = this.props.availableDates; /*this.state.available[i.toString()];*/
             
-            if(isAv) {
-                calendar.push(<div key={i} onClick={this.setDate} className="grid-item">{i + 1}</div>);
+            if(availableDates.indexOf(i) !== -1) {
+                calendar.push(<div id={i + 1} key={i} onClick={this.setDate} className="grid-item">{i + 1}</div>);
             }
             else {
-                calendar.push(<div key={i} className="grid-item">{i + 1}</div>);
+                calendar.push(<div id={i + 1} key={i} className="grid-item">{i + 1}</div>);
             }        
         } 
         return calendar;
-    /*}*/
+    }
 }
 
 setDate(event) {
 
     event.target.classList.toggle('isActive');
+
     let date = event.target.innerHTML;
     if(this.state.checkInDate === '') {
         this.setState({checkInDate: date});
-
+        console.log("in: " + date);
 
     }
     else {
-        this.setState({checkOutDate: date});
+        if(parseInt(this.state.checkInDate) < parseInt(date)) {
+
+            this.setState({checkOutDate: date});
+            console.log("out: " + date);
+            console.log("in: " + this.state.checkInDate);
+
+            let totalPrice = (date - this.state.checkInDate) * 600;
+            this.setState({totalPrice: totalPrice})
+
+        }
+        else {
+
+            let oldCheckIn = this.state.checkInDate;
+            this.setState({checkInDate: date, checkOutDate: oldCheckIn});
+            console.log("out: " + oldCheckIn);
+            console.log("in: " + date);
+
+            let totalPrice = (oldCheckIn - date) * 600;
+            this.setState({totalPrice: totalPrice})
+        }
     }
 
     if(this.state.checkInDate !== '' && this.state.checkOutDate !== '') {
-
+        let checkIn = this.state.checkInDate;
+        let checkOut = this.state.checkOutDate;
+        let checkInDiv = document.getElementById(checkIn);
+        let checkOutDiv = document.getElementById(checkOut);
+        checkInDiv.classList.toggle('isActive');
+        checkOutDiv.classList.toggle('isActive');
+        this.setState({checkInDate: '', checkOutDate: ''})
     }
-    
-
-    
 }
 
 // toggleCheckin() {
@@ -105,11 +130,11 @@ setDate(event) {
         return (
             <div className="container">
                 <div className="row">
-                    <p2>650kr</p2>
+                    <p2>{this.state.totalPrice} sek</p2>
                 </div>
                 <div className="row">
-                    <button /* onClick={this.toggleCheckIn} */ className={this.state.isActive} >Incheck</button>
-                    <button /* onClick={this.toggle} */ className={this.state.isActive} >Utcheck</button>
+                    <button /* onClick={this.toggleCheckIn} */ className={this.state.isActive} >Incheck: {this.state.checkInDate}</button>
+                    <button /* onClick={this.toggle} */ className={this.state.isActive} >Utcheck: {this.state.checkOutDate}</button>
                 </div>
                 <div className="row">
                     <button>(--</button>

@@ -15,8 +15,20 @@ export function loadAvailableTimes() {
 	}
 }
 
-
-
+export function loadRoomByIdSuccess(room) {
+	return { type: types.LOAD_ROOM_BY_ID_SUCCESS, room };
+}
+export function loadRoomById(roomId) {
+	return function (dispatch) {
+		return axios.get(endpoints.rooms + "/" + roomId)
+			.then(function (response) {
+				dispatch(loadRoomByIdSuccess(response.data));
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}
+}
 
 // export function updateBooking(booking) {
 // 	return { type: types.UPDATE_BOOKING, booking };

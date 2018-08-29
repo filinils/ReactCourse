@@ -1,57 +1,51 @@
 import React from "react";
 import RouteWithSubRoutes from "../../../config/RouteWithSubRoutes";
+import { connect } from "react-redux";
+import Booking from '../../Booking/Booking';
 
 import axios from 'axios';
-import Booking from '../../Booking/Booking';
+import * as availableActions from "../../../actions/availableActions";
 
 class RoomPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {room:  {
 			id: '',
-			img: [],
+			img: '',
 			price: '',
 			title: '',
-			description: ''
+			description: '',
+			type: '',
+            guests: '',
+            nrOfRooms: '',
+            nrOfBeds: '',
+            nrOfBathrooms: ''
 		}}
 
 		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 
-	getRoom(roomId) {
-		return axios.get('http://localhost:3000/api/rooms/' + roomId)
-				.then(function (response) {
-					return response.data;
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-	}
-
 	componentDidMount() {
-		const roomId = this.props.match.params.id;
-		this.getRoom(roomId).then(result => this.setState({room: result}));
-		
+		this.props.loadRoom(this.props.match.params.id);
 	}
 
 	render() {
 		return (
 			<div className="layout-content">
 
-				<div className="hero-img"></div>
+				<div className="hero-img" style={{ backgroundImage: "url(" + this.props.room.img + ")" }}></div>
 				<div className="box1">
 					<div className="rightside">
-					<h1 className="title">{this.state.room.title}</h1>
-					<p>Twentynine Palms</p>	
+					<h1 className="title">{this.props.room.title}</h1>
+					<p>{this.props.room.type}</p>	
 					<div className="row">
-						<div className="column">4 gäster </div>
-						<div className="column">2 sovrum </div>
-						<div className="column">2 sängar </div>
-						<div className="column">1 badrum</div>
+						<div className="column">{this.props.room.guests} gäster </div>
+						<div className="column">{this.props.room.nrOfRooms} sovrum </div>
+						<div className="column">{this.props.room.nrOfBeds} sängar </div>
+						<div className="column">{this.props.room.nrOfBathrooms} badrum</div>
 					</div>				
 						<div className="box-text">
-							<h4>OENDETS HÖJDPUNKTER</h4>
-							<p>Bra läge · 95 % av gäster nyligen gav boendets läge fem stjärnor.</p>
+							<p>{this.props.room.description}</p>
 						</div>
 					</div>
 					<div className="leftside">
@@ -66,4 +60,32 @@ class RoomPage extends React.Component {
 	}
 }
 
-export default RoomPage;
+function mapStateToProps(state, ownProps) {
+	return {
+		room: state.room ? state.room :  {
+			id: '',
+			img: '',
+			price: '',
+			title: '',
+			description: '',
+			type: '',
+            guests: '',
+            nrOfRooms: '',
+            nrOfBeds: '',
+            nrOfBathrooms: ''
+		}
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		loadRoom: (roomId) => {
+			return dispatch(availableActions.loadRoomById(roomId));
+		}
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(RoomPage);
