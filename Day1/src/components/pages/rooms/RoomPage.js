@@ -8,7 +8,7 @@ class StartPage extends React.Component {
 		super(props);
 		this.state = {room:  {
 			id: '',
-			img: [],
+			img: '',
 			price: '',
 			title: '',
 			description: ''
@@ -37,7 +37,7 @@ class StartPage extends React.Component {
 		return (
 			<div className="layout-content">
 
-				<div className="hero-img"></div>
+				<div className="hero-img" style={{ backgroundImage: "url(" + this.state.room.img + ")" }}></div>
 				<div className="box1">
 					<div className="rightside">
 					<h1 className="title">{this.state.room.title}</h1>
