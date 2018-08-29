@@ -6,38 +6,36 @@ import axios from 'axios';
 class StartPage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			room: {
-				id: '',
-				img: '',
-				price: '',
-				title: '',
-				description: '',
-				type: '',
-				guests: '',
-				nrOfRooms: '',
-				nrOfBeds: '',
-				nrOfBathrooms: ''
-			}
-		}
+		this.state = {room:  {
+			id: '',
+			img: '',
+			price: '',
+			title: '',
+			description: '',
+			type: '',
+            guests: '',
+            nrOfRooms: '',
+            nrOfBeds: '',
+            nrOfBathrooms: ''
+		}}
 
 		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 
 	getRoom(roomId) {
-		return axios.get('http://46.101.184.228:3000/api/rooms/' + roomId)
-			.then(function (response) {
-				return response.data;
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+		return axios.get('http://localhost:3000/api/rooms/' + roomId)
+				.then(function (response) {
+					return response.data;
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 	}
 
 	componentDidMount() {
 		const roomId = this.props.match.params.id;
-		this.getRoom(roomId).then(result => this.setState({ room: result }));
-
+		this.getRoom(roomId).then(result => this.setState({room: result}));
+		
 	}
 
 	render() {
@@ -47,14 +45,14 @@ class StartPage extends React.Component {
 				<div className="hero-img" style={{ backgroundImage: "url(" + this.state.room.img + ")" }}></div>
 				<div className="box1">
 					<div className="rightside">
-						<h1 className="title">{this.state.room.title}</h1>
-						<p>{this.state.room.type}</p>
-						<div className="row">
-							<div className="column">{this.state.room.guests} gäster </div>
-							<div className="column">{this.state.room.nrOfRooms} sovrum </div>
-							<div className="column">{this.state.room.nrOfBeds} sängar </div>
-							<div className="column">{this.state.room.nrOfBathrooms} badrum</div>
-						</div>
+					<h1 className="title">{this.state.room.title}</h1>
+					<p>{this.state.room.type}</p>	
+					<div className="row">
+						<div className="column">{this.state.room.guests} gäster </div>
+						<div className="column">{this.state.room.nrOfRooms} sovrum </div>
+						<div className="column">{this.state.room.nrOfBeds} sängar </div>
+						<div className="column">{this.state.room.nrOfBathrooms} badrum</div>
+					</div>				
 						<div className="box-text">
 							<p>{this.state.room.description}</p>
 						</div>

@@ -7,78 +7,77 @@ import * as moment from 'moment';
 
 export default class Booking extends React.Component {
 
-    constructor(props) {
-        super(props);
+constructor(props) {
+    super(props);
 
-        this.state = {
-            available: []
+    this.state = {
+        available: []
+    }
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.renderMonth = this.renderMonth.bind(this);
+}       
+
+// onChange = date => this.setState({ date })
+
+getAvailabeTimes(){
+    return axios.get("http://localhost:3000/api/available/")
+    .then(function(response) {
+        return response.data;
+        
+    })
+}
+
+componentDidMount() {
+
+    this.getAvailabeTimes().then((response)=>{
+    this.setState({available:response})}
+    )
+          
+    
+}
+
+
+renderMonth() {
+
+    let calendar = [];
+
+    
+    const days = moment().daysInMonth();
+
+    for(let i = 0; i < days; i++) {
+        let isAv = this.state.available[i.toString()];
+        
+        if(isAv) {
+            calendar.push(<div key={i} className="grid-item">{i + 1}a</div>);
         }
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.renderMonth = this.renderMonth.bind(this);
-    }
-
-    // onChange = date => this.setState({ date })
-
-    getAvailabeTimes() {
-        return axios.get("http://46.101.184.228:3000/api/available/")
-            .then(function (response) {
-                return response.data;
-
-            })
-    }
-
-    componentDidMount() {
-
-        this.getAvailabeTimes().then((response) => {
-            this.setState({ available: response })
+        else {
+            calendar.push(<div key={i} className="grid-item">{i + 1}</div>);
         }
-        )
-
-
+        
+        
     }
 
+    return calendar;
+}
 
-    renderMonth() {
+// RenderDates(dates) {
 
-        let calendar = [];
+//     const mapDates = () => <div className="grid-item">{dates}</div>
 
+//     return (
 
-        const days = moment().daysInMonth();
+//     );
+// }
 
-        for (let i = 0; i < days; i++) {
-            let isAv = this.state.available[i.toString()];
-
-            if (isAv) {
-                calendar.push(<div key={i} className="grid-item">{i + 1}a</div>);
-            }
-            else {
-                calendar.push(<div key={i} className="grid-item">{i + 1}</div>);
-            }
-
-
-        }
-
-        return calendar;
-    }
-
-    // RenderDates(dates) {
-
-    //     const mapDates = () => <div className="grid-item">{dates}</div>
-
-    //     return (
-
-    //     );
-    // }
-
-    render() {
+    render(){
 
         const calendarStrings = {
-            lastDay: '[Yesterday at] LT',
-            sameDay: '[Today at] LT',
-            nextDay: '[Tomorrow at] LT',
-            lastWeek: '[last] dddd [at] LT',
-            nextWeek: 'dddd [at] LT',
-            sameElse: 'L'
+            lastDay : '[Yesterday at] LT',
+            sameDay : '[Today at] LT',
+            nextDay : '[Tomorrow at] LT',
+            lastWeek : '[last] dddd [at] LT',
+            nextWeek : 'dddd [at] LT',
+            sameElse : 'L'
         };
 
         return (
@@ -100,10 +99,10 @@ export default class Booking extends React.Component {
                     value={this.state.date}
                 /> */}
                 <div className="grid-container">
-                    {this.renderMonth()}
+                 {this.renderMonth()}
                 </div>
-
-
+                
+                   
                 {/* {this.RenderDates(this.state.available)} */}
                 {/* <div className="grid-container">
                     <div className="grid-item">1</div>
@@ -120,6 +119,6 @@ export default class Booking extends React.Component {
             </div>
         )
     };
-
+    
 
 }
