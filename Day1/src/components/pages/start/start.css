@@ -1,11 +1,80 @@
-.grid {
-}
+.grid {}
+
 .row {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
-	grid-template-rows: auto auto auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
 }
 
-.column {
+.startPageColumn {
+    background: url(https://a0.muscache.com/im/pictures/17979331/3f134177_original.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.startPageColumn p,
+.startPageColumn h2 {
+    color: #FFF;
+}
+
+.rowinlineblock .column {
+    display: inline-block !important;
+}
+
+.headerSearch {
+    background-image: url('https://images.pexels.com/photos/457044/pexels-photo-457044.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100%;
+}
+
+.filter span {
+    padding-left: 50px;
+    font-size: 30px;
+    border: 1px solid;
+    padding-right: 50px;
+    margin-left: 35px;
+    cursor: pointer;
+}
+
+.headerSearch input {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 120px;
+}
+
+.paragraphDescr {
+    display: inline-block;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.chatLog {
+    border: 1px solid #000;
+    height: 306px;
+    overflow: auto;
+}
+
+#chatTimespan {
+    float: right;
+    margin-top: 8px;
+    margin-right: 15px;
+}
+
+#chatUserName {
+    float: left;
+    margin-top: 8px;
+    margin-left: 15px;
+}
+
+.chatLog p {
+    margin-top: 60px;
 }

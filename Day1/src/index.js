@@ -1,12 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:3000");
-
-socket.on("connect", () => {
-	console.log("------------------->connected to server");
-});
 
 import { AppContainer } from "react-hot-loader";
 // AppContainer is a necessary wrapper component for HMR

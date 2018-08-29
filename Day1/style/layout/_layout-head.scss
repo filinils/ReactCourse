@@ -3,3 +3,11 @@
     flex-direction:row;
     justify-content: space-between;
 }
+
+.hero-img {
+    background-size: cover;
+    width: 100%;
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
