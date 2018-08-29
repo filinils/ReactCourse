@@ -1,12 +1,12 @@
 var available = () => {
 
     function read(req, res) {
-           var dates = {
-               "5": {}, 
-               "4": {},
-               "6": {}
+           var dates = [
+               4, 
+               5,
+               6
 
-           };
+           ];
 
             res.send(dates);
     }
