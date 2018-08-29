@@ -1,6 +1,8 @@
 import React from "react";
 import RouteWithSubRoutes from "../../../config/RouteWithSubRoutes";
 import { connect } from "react-redux";
+import Booking from '../../Booking/Booking';
+
 import axios from 'axios';
 import * as availableActions from "../../../actions/availableActions";
 
@@ -47,7 +49,10 @@ class RoomPage extends React.Component {
 						</div>
 					</div>
 					<div className="leftside">
-						<h3 className="titleh3">000000</h3>
+						<h3 className="titleh3">Boka</h3>
+						<div>
+							<Booking />
+						</div>
 					</div>
 				</div>
 			</div>
