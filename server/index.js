@@ -9,8 +9,26 @@ var http = require("http").Server(app);
 
 var io = require("socket.io")(http);
 
-io.on("connection", () => {
+io.on("connection", (socket) => {
 	console.log("connection is on :-)");
+
+	var messageJson = {
+		message: socket.message,
+		timestamp: socket.timestamp,
+		username: socket.username
+	}
+
+	socket.on('new_message', (data) => {
+		messageJson = {
+			message: data.message,
+			timestamp: data.timestamp,
+			username: data.username
+		}
+
+		io.emit('new_message', {
+			messageJson
+		});
+	})
 });
 
 app.use(function (req, res, next) {
