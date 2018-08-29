@@ -11,7 +11,12 @@ class StartPage extends React.Component {
 			img: '',
 			price: '',
 			title: '',
-			description: ''
+			description: '',
+			type: '',
+            guests: '',
+            nrOfRooms: '',
+            nrOfBeds: '',
+            nrOfBathrooms: ''
 		}}
 
 		this.componentDidMount = this.componentDidMount.bind(this);
@@ -41,16 +46,15 @@ class StartPage extends React.Component {
 				<div className="box1">
 					<div className="rightside">
 					<h1 className="title">{this.state.room.title}</h1>
-					<p>Twentynine Palms</p>	
+					<p>{this.state.room.type}</p>	
 					<div className="row">
-						<div className="column">4 gäster </div>
-						<div className="column">2 sovrum </div>
-						<div className="column">2 sängar </div>
-						<div className="column">1 badrum</div>
+						<div className="column">{this.state.room.guests} gäster </div>
+						<div className="column">{this.state.room.nrOfRooms} sovrum </div>
+						<div className="column">{this.state.room.nrOfBeds} sängar </div>
+						<div className="column">{this.state.room.nrOfBathrooms} badrum</div>
 					</div>				
 						<div className="box-text">
-							<h4>OENDETS HÖJDPUNKTER</h4>
-							<p>Bra läge · 95 % av gäster nyligen gav boendets läge fem stjärnor.</p>
+							<p>{this.state.room.description}</p>
 						</div>
 					</div>
 					<div className="leftside">
