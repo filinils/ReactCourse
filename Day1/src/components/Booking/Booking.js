@@ -54,7 +54,7 @@ let availableDates = this.props.availableDates;
         for(let i = 0; i < days; i++) {
             
             if(availableDates.indexOf(i) !== -1) {
-                calendar.push(<div id={i + 1} key={i} onClick={this.setDate} className="grid-item">{i + 1}</div>);
+                calendar.push(<div id={i + 1} key={i} onClick={this.setDate} className="grid-item isavailable">{i + 1}</div>);
             }
             else {
                 calendar.push(<div id={i + 1} key={i} className="grid-item">{i + 1}</div>);
@@ -137,9 +137,9 @@ setDate(event) {
                     <button /* onClick={this.toggle} */ className={this.state.isActive} >Utcheck: {this.state.checkOutDate}</button>
                 </div>
                 <div className="row">
-                    <button>(--</button>
+                    <button>(-</button>
                     <p2>Oktober 2018</p2>
-                    <button>--)</button>
+                    <button>-)</button>
                 </div>
                 {/* <Calendar 
                     // onChange={this.onChange}

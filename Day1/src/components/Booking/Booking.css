@@ -8,6 +8,10 @@
     cursor: pointer;
 }
 
-.isactive {
+.isavailable.isactive {
    background-color: green;
+}
+
+.isavailable {
+    background-color: blue;
 }
