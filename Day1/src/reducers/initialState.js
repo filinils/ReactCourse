@@ -1,3 +1,4 @@
 export default {
-	availableDates: {}
+	availableDates: {},
+	room: {}
 };
