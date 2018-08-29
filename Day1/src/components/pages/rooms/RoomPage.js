@@ -4,7 +4,7 @@ import RouteWithSubRoutes from "../../../config/RouteWithSubRoutes";
 import axios from 'axios';
 import Booking from '../../Booking/Booking';
 
-class StartPage extends React.Component {
+class RoomPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {room:  {
@@ -66,4 +66,4 @@ class StartPage extends React.Component {
 	}
 }
 
-export default StartPage;
+export default RoomPage;

@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import * as moment from 'moment';
+import * as availableActions from "../../actions/availableActions";
+import { connect } from "react-redux";
 
-export default class Booking extends React.Component {
+class Booking extends React.Component {
 
 constructor(props) {
     super(props);
 
     this.state = {
-        available: [],
+        availableDates: [],
         checkInDate: '',
         checkOutDate: '',
         checkInActive: ''
@@ -17,45 +19,47 @@ constructor(props) {
     this.componentDidMount = this.componentDidMount.bind(this);
     this.renderMonth = this.renderMonth.bind(this);
     this.setDate = this.setDate.bind(this);
+
+
+
 }       
 
-getAvailabeTimes(){
-    return axios.get("http://localhost:3000/api/available/")
-    .then(function(response) {
-        return response.data;
+// getAvailabeTimes(){
+
+//     return this.props.loadAvailableTimes;
+
+//     // return axios.get("http://localhost:3000/api/available/")
+//     // .then(function(response) {
+//     //     return response.data;
         
-    })
-}
+//     // })
+// }
 
 componentDidMount() {
 
-    this.getAvailabeTimes().then((response)=>{
-    this.setState({available:response})}
-    )
+    this.props.loadAvailableTimes();
 }
 
 
 renderMonth() {
 
-    let calendar = [];
+    // if(this.props.availableDates){
 
+        let calendar = [];
+        const days = moment().daysInMonth();
     
-    const days = moment().daysInMonth();
-
-    for(let i = 0; i < days; i++) {
-        let isAv = this.state.available[i.toString()];
-        
-        if(isAv) {
-            calendar.push(<div key={i} onClick={this.setDate} className="grid-item">{i + 1}</div>);
-        }
-        else {
-            calendar.push(<div key={i} className="grid-item">{i + 1}</div>);
-        }
-        
-        
-    }
-
-    return calendar;
+        for(let i = 0; i < days; i++) {
+            let isAv = this.props.availableDates; /*this.state.available[i.toString()];*/
+            
+            if(isAv) {
+                calendar.push(<div key={i} onClick={this.setDate} className="grid-item">{i + 1}</div>);
+            }
+            else {
+                calendar.push(<div key={i} className="grid-item">{i + 1}</div>);
+            }        
+        } 
+        return calendar;
+    /*}*/
 }
 
 setDate(event) {
@@ -98,16 +102,6 @@ setDate(event) {
 // }
 
     render(){
-
-        // const calendarStrings = {
-        //     lastDay : '[Yesterday at] LT',
-        //     sameDay : '[Today at] LT',
-        //     nextDay : '[Tomorrow at] LT',
-        //     lastWeek : '[last] dddd [at] LT',
-        //     nextWeek : 'dddd [at] LT',
-        //     sameElse : 'L'
-        // };
-
         return (
             <div className="container">
                 <div className="row">
@@ -135,3 +129,20 @@ setDate(event) {
     
 
 }
+
+function mapStateToProps(state, ownProps) {
+    return {
+        availableDates: state.availableDates
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {loadAvailableTimes: () => { return dispatch(availableActions.loadAvailableTimes()) }}
+}
+
+
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Booking);
