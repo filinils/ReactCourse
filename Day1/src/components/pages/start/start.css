@@ -59,6 +59,8 @@
 
 .chatLog {
     border: 1px solid #000;
+    height: 306px;
+    overflow: auto;
 }
 
 #chatTimespan {
